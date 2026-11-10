@@ -143,5 +143,3 @@ npm run format:check
 ```
 
 The tests cover authentication, CSRF, web/REST CRUD, combined filters, state transitions, concurrency, rollback, history protection and output escaping. CI runs these on Ubuntu. See [requirements mapping](docs/REQUIREMENTS.md) for marking evidence and [10-minute demonstration](docs/DEMO.md) for the presentation sequence.
-
-Course deadlines in the supplied specification: presentation slot registration **16 November 2026, 23:59**; project ZIP submission **30 November 2026, 23:59**. Prepare the demo on local Ubuntu or your cloud host and submit early. Do not include `node_modules`, `.env`, `.git` or MongoDB downloads. Use the internal folder `comp3810sef_group41`; confirm the ZIP separator with the tutor because the specification's naming rule and example differ.
