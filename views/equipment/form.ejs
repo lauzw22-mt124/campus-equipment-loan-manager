@@ -1,0 +1,17 @@
+<%- include('../partials/header') %>
+<div class="heading">
+<div><p class="eyebrow">EQUIPMENT RECORD</p>
+<h1><%= title %></h1><p class="muted">Use check-out, return and maintenance actions to change availability.</p></div>
+<a href="/equipment">Back to equipment</a></div>
+
+<form class="panel editor" method="post" action="<%= editing ? '/equipment/' + item._id + '/edit' : '/equipment' %>"><% if(error) { %><p class="alert" role="alert"><%= error %></p><% } %><input type="hidden" name="_csrf" value="<%= csrf %>">
+<div class="grid2">
+<label>Asset code<input name="assetCode" value="<%= item.assetCode || '' %>" required maxlength="32" pattern="[A-Za-z0-9-]+" placeholder="e.g. PROJ-002"></label>
+<label>Equipment name<input name="name" value="<%= item.name || '' %>" required maxlength="120"></label>
+<label>Category<select name="category" required><% for(const c of ['projector','microphone','tripod']) { %><option value="<%= c %>" <%= item.category === c ? 'selected' : '' %>><%= labels[c] %></option><% } %></select></label>
+<label>Location<input name="location" value="<%= item.location || '' %>" required maxlength="120" placeholder="e.g. Club Room / Cabinet A"></label></div>
+
+<label>Notes<textarea name="description" maxlength="1000" rows="4"><%= item.description || '' %></textarea></label>
+<div class="actions"><button class="primary">Save equipment</button><a class="button quiet" href="/equipment">Cancel</a></div>
+</form>
+<%- include('../partials/footer') %>

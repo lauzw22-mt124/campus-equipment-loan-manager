@@ -1,0 +1,23 @@
+<%- include('../partials/header') %>
+<div class="heading">
+<div><p class="eyebrow">EQUIPMENT</p>
+<h1>Equipment</h1><p class="muted">Individual assets. Find the right equipment by category and status.</p></div>
+<a class="button primary" href="/equipment/new">+ Add equipment</a></div>
+
+<form class="panel filters" action="/equipment" method="get">
+<label class="grow">Keyword<input name="q" value="<%= query.q || '' %>" maxlength="80" placeholder="Search name or asset code"></label>
+<label>Category<select name="category"><option value="">All categories</option><% for(const c of ['projector','microphone','tripod']) { %><option value="<%= c %>" <%= query.category === c ? 'selected' : '' %>><%= labels[c] %></option><% } %></select></label>
+<label>Status<select name="status"><option value="">All statuses</option><% for(const s of ['available','borrowed','maintenance']) { %><option value="<%= s %>" <%= query.status === s ? 'selected' : '' %>><%= labels[s] %></option><% } %></select></label><button class="primary">Search</button><a class="button quiet" href="/equipment">Clear</a></form>
+<p class="muted">Total: <%= items.length %> items</p>
+<section class="cards"><% for(const item of items) { %>
+<article class="panel card">
+<div class="cardtop"><span class="category"><%= labels[item.category] %></span><span class="badge <%= item.status %>"><%= labels[item.status] %></span></div>
+<p class="asset"><%= item.assetCode %></p>
+<h2><a href="/equipment/<%= item._id %>"><%= item.name %></a></h2><p class="muted">Location · <%= item.location %></p>
+<div class="cardactions"><a href="/equipment/<%= item._id %>">View details →</a><% if(item.status === 'available') { %><a class="button" href="/loans/new?equipmentId=<%= item._id %>">Check out</a><% } %></div>
+</article>
+<% } %></section>
+<% if(!items.length) { %>
+<div class="panel empty">
+<h2>No equipment matches your search</h2><p>Try another keyword or clear the filters.</p><a href="/equipment">Clear filters</a></div>
+<% } %><%- include('../partials/footer') %>

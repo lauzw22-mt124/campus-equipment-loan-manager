@@ -1,0 +1,9 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title><%= title %> · Campus Gear</title><link rel="stylesheet" href="/static/css/app.css"><script src="/static/js/app.js" defer></script></head><body>
+
+<header class="top"><a class="brand" href="/">CG<span>Campus Gear<small>Equipment loans / Group41</small></span></a><% if (user) { %>
+<nav aria-label="Main navigation"><a href="/">Overview</a><a href="/equipment">Equipment</a><a href="/loans">Loans</a></nav>
+
+<form action="/logout" method="post"><input type="hidden" name="_csrf" value="<%= csrf %>"><span class="user"><%= user.displayName %></span><button class="quiet">Sign out</button></form>
+<% } %></header>
+
+<main>

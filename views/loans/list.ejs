@@ -1,0 +1,29 @@
+<%- include('../partials/header') %>
+<div class="heading">
+<div><p class="eyebrow">LOAN HISTORY</p>
+<h1>Loans</h1><p class="muted">Search by borrower name or ID and track every loan.</p></div>
+<a class="button" href="/equipment?status=available">Find available equipment</a></div>
+
+<form class="panel filters" action="/loans" method="get">
+<label class="grow">Borrower<input name="borrower" value="<%= query.borrower || '' %>" maxlength="80" placeholder="Borrower name or ID"></label>
+<label>Loan status<select name="status"><option value="">All statuses</option><option value="active" <%= query.status === 'active' ? 'selected' : '' %>>Active</option><option value="returned" <%= query.status === 'returned' ? 'selected' : '' %>>Returned</option></select></label><% if(query.equipmentId) { %><input type="hidden" name="equipmentId" value="<%= query.equipmentId %>"><% } %><button class="primary">Search</button><a class="button quiet" href="/loans">Clear</a></form>
+
+<section class="panel"><p class="muted">Total: <%= loans.length %> records</p><% if(!loans.length) { %>
+<div class="empty">
+<h2>No matching loans</h2><p>Try another borrower or loan status.</p></div>
+<% } else { %>
+<div class="tablewrap">
+<table>
+<thead>
+<tr><th>Equipment</th><th>Borrower</th><th>Checked out / Due</th><th>Returned</th><th>Status / Action</th></tr>
+</thead>
+
+<tbody><% for(const loan of loans) { %>
+<tr><td><a href="/equipment/<%= loan.equipmentId._id %>"><%= loan.equipmentId.name %></a><small><%= loan.equipmentId.assetCode %></small></td><td><%= loan.borrowerName %><small><%= loan.borrowerId %></small></td><td><%= date(loan.borrowedAt) %><small>Due: <%= date(loan.dueAt) %></small></td><td><%= date(loan.returnedAt) %></td><td><span class="badge <%= loan.status %>"><%= labels[loan.status] %></span><% if(loan.status === 'active') { %>
+<form class="spaced-small" method="post" action="/loans/<%= loan._id %>/return" data-confirm="Confirm that this equipment has been returned?"><input type="hidden" name="_csrf" value="<%= csrf %>"><button>Return equipment</button></form>
+<% } %></td></tr>
+<% } %></tbody>
+</table>
+</div>
+<% } %></section>
+<%- include('../partials/footer') %>

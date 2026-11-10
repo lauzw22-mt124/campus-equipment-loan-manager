@@ -1,0 +1,28 @@
+<%- include('partials/header') %>
+<div class="heading">
+<div><p class="eyebrow">OVERVIEW</p>
+<h1>Your equipment overview</h1><p class="muted">A clear view of equipment availability and recent activity.</p></div>
+<a class="button primary" href="/equipment/new">+ Add equipment</a></div>
+
+<section class="stats"><% for(const status of ['available','borrowed','maintenance']) { %><a class="panel stat" href="/equipment?status=<%= status %>"><span class="badge <%= status %>"><%= labels[status] %></span><strong><%= counts[status] || 0 %></strong><span class="muted">items →</span></a><% } %></section>
+
+<section class="panel">
+<div class="sectionhead">
+<h2>Recent loans</h2><a href="/loans">View all →</a></div>
+<% if(!recent.length) { %>
+<div class="empty">
+<h3>No loans yet</h3><p>Choose an available asset to create your first loan.</p><a class="button" href="/equipment">Browse equipment</a></div>
+<% } else { %>
+<div class="tablewrap">
+<table>
+<thead>
+<tr><th>Equipment</th><th>Borrower</th><th>Checked out</th><th>Status</th></tr>
+</thead>
+
+<tbody><% for(const loan of recent) { %>
+<tr><td><a href="/equipment/<%= loan.equipmentId._id %>"><%= loan.equipmentId.name %></a></td><td><%= loan.borrowerName %></td><td><%= date(loan.borrowedAt) %></td><td><span class="badge <%= loan.status %>"><%= labels[loan.status] %></span></td></tr>
+<% } %></tbody>
+</table>
+</div>
+<% } %></section>
+<%- include('partials/footer') %>

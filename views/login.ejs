@@ -1,0 +1,13 @@
+<%- include('partials/header') %>
+<section class="login">
+<div><p class="eyebrow">CAMPUS EQUIPMENT</p>
+<h1>Equipment in motion.<br>Every loan in view.</h1><p class="muted">Manage projectors, microphones and tripods,<br>from the first check-out to the final return.</p>
+<div class="illustration" aria-hidden="true">◉<span>PROJECTORS / MICROPHONES / TRIPODS</span></div>
+</div>
+
+<form class="panel loginbox" action="/login" method="post">
+<h2>Administrator sign-in</h2><p class="muted">Continue with your assigned administrator account.</p><% if(error) { %><p role="alert" class="alert"><%= error %></p><% } %><input type="hidden" name="_csrf" value="<%= csrf %>">
+<label>Username<input name="username" required maxlength="80" autocomplete="username"></label>
+<label>Password<input type="password" name="password" required maxlength="200" autocomplete="current-password"></label><button class="primary wide">Sign in to Campus Gear</button></form>
+</section>
+<%- include('partials/footer') %>

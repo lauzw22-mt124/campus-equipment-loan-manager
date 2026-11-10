@@ -1,0 +1,6 @@
+<%- include('partials/header') %>
+<section class="panel errorpage"><p class="eyebrow">REQUEST <%= error.status %></p>
+<h1>Unable to complete the action</h1><p role="alert"><%= error.message %></p>
+<div class="actions"><button type="button" data-back>Go back</button><a class="button primary" href="/equipment">Equipment</a></div>
+</section>
+<%- include('partials/footer') %>
