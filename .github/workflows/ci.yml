@@ -1,29 +1,24 @@
-name: Import Group41 source
-on: workflow_dispatch
+name: Validate application
+on: [push, pull_request, workflow_dispatch]
 permissions:
-  contents: write
+  contents: read
 jobs:
-  import:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      MONGOMS_DOWNLOAD_DIR: ${{ github.workspace }}/.cache/mongodb
     steps:
       - uses: actions/checkout@v4
-      - name: Expand reviewed source archive
-        run: |
-          python3 - <<'PY'
-          from pathlib import Path
-          from zipfile import ZipFile
-          root = Path.cwd().resolve()
-          with ZipFile('project-source.zip') as archive:
-              for item in archive.infolist():
-                  target = (root / item.filename).resolve()
-                  if not target.is_relative_to(root) or '.git' in Path(item.filename).parts or item.filename.startswith('.github/workflows/'):
-                      raise RuntimeError('Unexpected archive path')
-              archive.extractall(root)
-          Path('project-source.zip').unlink()
-          PY
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -A
-          git commit -m "Import English Group41 reference implementation and documentation"
-          git push origin HEAD:main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/cache@v4
+        with:
+          path: .cache/mongodb
+          key: mongodb-7.0.24-${{ runner.os }}-${{ runner.arch }}
+      - run: npm ci --ignore-scripts
+      - run: npm run check
+      - run: npm run format:check
+      - run: npm test
