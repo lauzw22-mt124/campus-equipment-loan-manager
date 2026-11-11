@@ -23,12 +23,12 @@ Group number: **41**. Names, SIDs and the final assignment must be completed by 
 
 | Role | Student name / SID | Proposed ownership                                         | Main files                                                        |
 | ---- | ------------------ | ---------------------------------------------------------- | ----------------------------------------------------------------- |
-| A    | To be completed    | Integration, configuration and authentication              | `server.js`, `app.js`, `routes/auth.js`, `middleware/auth.js`     |
-| B    | To be completed    | Data model, indexes, seed and equipment rules              | `models/index.js`, `config/db.js`, `services/equipmentService.js` |
-| C    | To be completed    | Equipment web CRUD and filters                             | `routes/equipment.js`, `views/equipment/`                         |
-| D    | To be completed    | Loan, return and maintenance verification                  | `services/loanService.js`, `routes/loans.js`, `views/loans/`      |
-| E    | To be completed    | REST services and curl demonstration                       | `routes/api.js`, `scripts/demo-api.sh`, `docs/API.md`             |
-| F    | To be completed    | Interface, integration tests and presentation coordination | `public/`, `tests/`, `docs/DEMO.md`                               |
+| LIU Jinwei   | To be completed    | Integration, configuration and authentication              | `server.js`, `app.js`, `routes/auth.js`, `middleware/auth.js`     |
+| HE Ziqian    | To be completed    | Data model, indexes, seed and equipment rules              | `models/index.js`, `config/db.js`, `services/equipmentService.js` |
+| ZHU Hengxi   | To be completed    | Equipment web CRUD and filters                             | `routes/equipment.js`, `views/equipment/`                         |
+| LEI Haodong  | To be completed    | Loan, return and maintenance verification                  | `services/loanService.js`, `routes/loans.js`, `views/loans/`      |
+| SHEN Xin     | To be completed    | REST services and curl demonstration                       | `routes/api.js`, `scripts/demo-api.sh`, `docs/API.md`             |
+| LIU Jiaxu    | To be completed    | Interface, integration tests and presentation coordination | `public/`, `tests/`, `docs/DEMO.md`                               |
 
 All six members should be able to explain the entire request → route → service → model → database → response flow. All members must contribute; presenting alone does not substitute for implementation work.
 
